@@ -14,7 +14,7 @@ def adicionar_livro(isbn, titulo, autor, editora, genero, quantidade ,preco):
         'preco': preco
     }
 
-    db_livros = os.path.join(os.getcwd(), 'database\\arcevo_de_livros.json')
+    db_livros = os.path.join(os.getcwd(), 'database\\acervo_de_livros.json')
 
     if os.path.exists(db_livros):
         with open(db_livros, 'r', encoding="utf-8") as arq:
@@ -38,7 +38,7 @@ def adicionar_livro(isbn, titulo, autor, editora, genero, quantidade ,preco):
 
 #ok
 def editar_livro(isbn_livro):
-    origem = os.path.join(os.getcwd(), 'database\\arcevo_de_livros.json')
+    origem = os.path.join(os.getcwd(), 'database\\acervo_de_livros.json')
 
     with open(origem, 'r', encoding='utf-8') as arq:
         livros = json.loads(arq.read())
@@ -69,7 +69,7 @@ def editar_livro(isbn_livro):
 
 #ok
 def buscar_livro(buscador):
-    listagem = os.path.join(os.getcwd(), 'database\\arcevo_de_livros.json')
+    listagem = os.path.join(os.getcwd(), 'database\\acervo_de_livros.json')
 
     if not os.path.exists(listagem):
         print('Arquivo não encontrado')
