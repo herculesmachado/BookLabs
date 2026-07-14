@@ -17,9 +17,9 @@ def adicionar_livro(isbn, titulo, autor, editora, genero, quantidade ,preco):
     db_livros = os.path.join(os.getcwd(), 'database\\acervo_de_livros.json')
 
     if os.path.exists(db_livros):
-        with open(db_livros, 'r', encoding="utf-8") as arq:
+        with open(db_livros, 'r', encoding="utf-8") as arquivo:
             try:
-                livros = json.loads(arq.read())
+                livros = json.loads(arquivo.read())
             except json.decoder.JSONDecodeError:
                 livros = []
     else:
@@ -27,8 +27,8 @@ def adicionar_livro(isbn, titulo, autor, editora, genero, quantidade ,preco):
 
     livros.append(livro)
 
-    with open(db_livros, 'w', encoding='UTF-8') as arq:
-        json.dump(livros, arq, ensure_ascii=False, indent=4)
+    with open(db_livros, 'w', encoding='UTF-8') as arquivo:
+        json.dump(livros, arquivo, ensure_ascii=False, indent=4)
 
     print()
     print('*' * 50)
@@ -40,18 +40,50 @@ def adicionar_livro(isbn, titulo, autor, editora, genero, quantidade ,preco):
 def editar_livro(isbn_livro):
     origem = os.path.join(os.getcwd(), 'database\\acervo_de_livros.json')
 
-    with open(origem, 'r', encoding='utf-8') as arq:
-        livros = json.loads(arq.read())
+    with open(origem, 'r', encoding='utf-8') as arquivo:
+        livros = json.loads(arquivo.read())
 
     for livro in livros:
         if livro['isbn'] == isbn_livro:
-            nova_quantidade = int(input("Digite o nova quantidade: "))
-            livro['quantidade'] = nova_quantidade
-            novo_preco = float(input("Digite o valor do livro: R$"))
-            livro['preco'] = novo_preco
 
-            with open(origem, 'w', encoding='UTF-8') as arq:
-                json.dump(livros, arq, ensure_ascii=False, indent=4)
+            alterar_quantidade = input("Deseja alterar a quantidade (S/N)?: ").upper()
+
+            if alterar_quantidade == 'S':
+                nova_quantidade = int(input("Digite uma nova quantidade: "))
+                livro['quantidade'] = nova_quantidade
+
+                print()
+                print('*' * 50)
+                print("Quantidade alterada com sucesso")
+                print('*' * 50)
+                print()
+            else:
+                print()
+                print('*' * 50)
+                print("Nenhuma quantidade foi alterada")
+                print('*' * 50)
+                print()
+
+
+            alterar_preco = input("Deseja alterar o valor (S/N)?: ").upper()
+
+            if alterar_preco == 'S':
+                novo_valor = float(input("Digite um novo valor: "))
+                livro['preco'] = novo_valor
+
+                print()
+                print('*' * 50)
+                print("Preço alterado com sucesso")
+                print('*' * 50)
+            else:
+                print()
+                print('*' * 50)
+                print("Nenhum preço foi alterado")
+                print('*' * 50)
+
+
+            with open(origem, 'w', encoding='UTF-8') as arquivo:
+                json.dump(livros, arquivo, ensure_ascii=False, indent=4)
 
             print()
             print('*' * 50)
@@ -80,7 +112,11 @@ def buscar_livro(buscador):
         dados = json.load(arquivo)
 
     if len(dados) == 0:
-        print('Nenhum tipo encontrado')
+        print()
+        print('*' * 50)
+        print("Livro não encontrado")
+        print('*' * 50)
+        print()
         return
 
 
@@ -105,6 +141,45 @@ def buscar_livro(buscador):
             print(f"Preço: {livro['preco']}")
             print("*" * 50)
             print()
+
+#ok
+def excluir_livro(isbn_para_deletar ):
+    listagem = os.path.join(os.getcwd(), 'database\\acervo_de_livros.json')
+
+    with open(listagem, 'r', encoding='UTF-8') as arquivo:
+        livros = json.load(arquivo)
+
+    if len(livros) == 0:
+        print()
+        print('*' * 50)
+        print("Livro não encontrado")
+        print('*' * 50)
+        print()
+        return
+
+    for livro in livros:
+        if livro['isbn'] == isbn_para_deletar:
+            livros.remove(livro)
+
+            print()
+            print('*' * 50)
+            print('Livro excluido com sucesso')
+            print('*' * 50)
+            print()
+        else:
+            print()
+            print('*' * 50)
+            print("Livro não encontrado")
+            print('*' * 50)
+            print()
+
+
+    with open(listagem, 'w', encoding='UTF-8') as arquivo:
+        json.dump(livros, arquivo, ensure_ascii=False, indent=4)
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-from crud import adicionar_livro, editar_livro, buscar_livro
+from crud import adicionar_livro, editar_livro, buscar_livro, excluir_livro
 from menu import menu
 
 while True:
@@ -27,6 +27,10 @@ while True:
             buscar_livro(buscador)
 
         case 4:
+            buscar_isbn_para_exclusao = int(input("Digite o ISBN para excluir: "))
+            excluir_livro(buscar_isbn_para_exclusao)
+
+        case 0:
             print("="*50)
             print("Obrigado por utilizar o nosso sistema")
             print("="*50)
