@@ -102,10 +102,9 @@ Durante o desenvolvimento deste projeto foram utilizados os seguintes conceitos:
 ==============================
 
 1 - Cadastrar Livro
-2 - Listar Livros
-3 - Buscar Livro
-4 - Editar Livro
-5 - Excluir Livro
+2 - Buscar Livro
+3 - Editar Livro
+4 - Excluir Livro
 0 - Sair
 
 Escolha uma opção:
@@ -124,6 +123,7 @@ Este projeto foi desenvolvido exclusivamente para fins de estudo e avaliação n
 **Hercules Machado**
 
 GitHub: https://github.com/herculesmachado
+Link para ver o vídeo do sistema em funcionamento: https://youtu.be/htcNosYeir0
 
 ---
 
